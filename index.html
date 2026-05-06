@@ -1,533 +1,971 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Case Study — Coming Soon</title>
-  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;700;900&family=Barlow:wght@400;500&display=swap" rel="stylesheet" />
-  <style>
-    :root {
-      --bg: #0a0a0a;
-      --surface: #111111;
-      --border: #222222;
-      --accent: #e8ff47;
-      --accent-dim: #b8cc2a;
-      --text: #f0f0f0;
-      --muted: #555555;
-      --mid: #888888;
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Earn the Scroll — A field study in adolescent screen behavior</title>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;0,6..72,800;1,6..72,300;1,6..72,400;1,6..72,500;1,6..72,600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --paper:#f3eee5;
+    --paper-2:#ebe5d8;
+    --ink:#0d0d0d;
+    --ink-2:#2a2826;
+    --muted:#6f6a5e;
+    --line:#c8c1b0;
+    --line-2:#a39c8a;
+    --accent:#c8412e;     /* warm editorial red */
+    --accent-2:#1a4d3a;   /* deep green */
+    --hilite:#f4d35e;     /* highlighter yellow */
+  }
+
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Newsreader',serif;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+
+  /* Paper texture with subtle warmth */
+  body::before{
+    content:'';
+    position:fixed;inset:0;
+    background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 300 300' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.07'/%3E%3C/svg%3E");
+    pointer-events:none;
+    z-index:1;
+    mix-blend-mode:multiply;
+  }
+
+  /* ── MASTHEAD ── */
+  .masthead{
+    border-bottom:3px double var(--ink);
+    padding:18px 40px;
+    display:grid;
+    grid-template-columns:1fr auto 1fr;
+    align-items:center;
+    gap:32px;
+    font-family:'JetBrains Mono',monospace;
+    font-size:11px;
+    text-transform:uppercase;
+    letter-spacing:0.14em;
+    position:relative;
+    z-index:2;
+  }
+  .masthead-l{display:flex;gap:24px;}
+  .masthead-r{display:flex;gap:24px;justify-content:flex-end;}
+  .nameplate{
+    font-family:'Newsreader',serif;
+    font-style:italic;
+    font-weight:500;
+    font-size:28px;
+    letter-spacing:-0.02em;
+    text-transform:none;
+  }
+
+  /* ── HERO ── */
+  .hero{
+    max-width:1320px;
+    margin:0 auto;
+    padding:48px 40px 64px;
+    position:relative;
+    z-index:2;
+    border-bottom:1px solid var(--ink);
+  }
+  .kicker{
+    font-family:'JetBrains Mono',monospace;
+    font-size:11px;
+    text-transform:uppercase;
+    letter-spacing:0.18em;
+    color:var(--accent);
+    margin-bottom:32px;
+    display:flex;align-items:center;gap:12px;
+  }
+  .kicker::before, .kicker::after{
+    content:'';flex:0 0 40px;height:1px;background:var(--accent);
+  }
+  .kicker::after{flex:1;}
+
+  h1.headline{
+    font-family:'Newsreader',serif;
+    font-weight:500;
+    font-size:clamp(48px, 8.4vw, 132px);
+    line-height:0.94;
+    letter-spacing:-0.025em;
+    margin-bottom:32px;
+    max-width:1180px;
+  }
+  h1.headline em{
+    font-style:italic;
+    font-weight:400;
+  }
+  h1.headline .ul{
+    background:linear-gradient(transparent 64%, var(--hilite) 64%, var(--hilite) 92%, transparent 92%);
+    padding:0 4px;
+  }
+
+  .deck{
+    font-family:'Newsreader',serif;
+    font-style:italic;
+    font-weight:400;
+    font-size:clamp(20px,2vw,26px);
+    line-height:1.45;
+    color:var(--ink-2);
+    max-width:780px;
+    margin-bottom:48px;
+  }
+
+  .byline{
+    border-top:1px solid var(--ink);
+    border-bottom:1px solid var(--ink);
+    padding:18px 0;
+    display:flex;
+    flex-wrap:wrap;
+    gap:48px;
+    font-family:'JetBrains Mono',monospace;
+    font-size:11px;
+    text-transform:uppercase;
+    letter-spacing:0.14em;
+  }
+  .byline div span{display:block;color:var(--muted);margin-bottom:4px;}
+  .byline div b{color:var(--ink);font-weight:500;}
+
+  /* ── DATAVIZ HERO BAND ── */
+  .data-band{
+    max-width:1320px;
+    margin:0 auto;
+    padding:64px 40px;
+    border-bottom:1px solid var(--ink);
+    position:relative;z-index:2;
+  }
+  .band-tag{
+    font-family:'JetBrains Mono',monospace;
+    font-size:15px;
+    font-weight:600;
+    letter-spacing:0.18em;
+    text-transform:uppercase;
+    color:var(--ink);
+    margin-bottom:40px;
+    display:flex;
+    align-items:center;
+    gap:14px;
+  }
+  .band-tag::before{
+    content:'';
+    display:block;
+    width:32px;height:3px;
+    background:var(--accent);
+  }
+  .band-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr 1fr;
+    gap:48px;
+  }
+  .band-cell{
+    border-top:3px solid var(--ink);
+    padding-top:24px;
+  }
+  .band-cell.urgent{border-top-color:var(--accent);}
+  .band-cell .figure{
+    font-family:'Newsreader',serif;
+    font-weight:300;
+    font-size:clamp(64px,8vw,128px);
+    line-height:0.95;
+    letter-spacing:-0.04em;
+    margin-bottom:8px;
+  }
+  .band-cell .figure em{
+    font-style:italic;
+    font-weight:400;
+  }
+  .band-cell .figure .accent{color:var(--accent);}
+  .band-cell .descr{
+    font-family:'Newsreader',serif;
+    font-size:18px;
+    line-height:1.45;
+    color:var(--ink-2);
+    margin-bottom:16px;
+  }
+  .band-cell .src{
+    font-family:'JetBrains Mono',monospace;
+    font-size:10px;
+    text-transform:uppercase;
+    letter-spacing:0.14em;
+    color:var(--muted);
+  }
+
+  /* Hand-drawn-feel chart */
+  .chart-block{
+    margin-top:48px;
+    border:1px solid var(--ink);
+    background:var(--paper-2);
+    padding:32px;
+    position:relative;
+  }
+  .chart-block::before{
+    content:'FIG. 01 — DAILY HOURS ON AVERAGE';
+    position:absolute;
+    top:-9px;left:24px;
+    background:var(--paper);
+    padding:0 10px;
+    font-family:'JetBrains Mono',monospace;
+    font-size:10px;
+    letter-spacing:0.18em;
+  }
+  .chart-legend{
+    position:absolute;
+    top:-12px;
+    right:24px;
+    background:var(--paper);
+    padding: 0 10px;
+    display:flex;
+    gap:18px;
+    align-items:center;
+    font-family:'JetBrains Mono',monospace;
+    font-size:12px;
+    letter-spacing:0.16em;
+    text-transform:uppercase;
+  }
+  .chart-legend .swatch{
+    display:inline-flex;
+    align-items:center;
+    gap:7px;
+  }
+  .chart-legend .swatch i{
+    display:block;
+    width:18px;height:18px;
+    border:1px solid var(--ink);
+  }
+  .chart-legend .swatch i.green{background:var(--accent-2);}
+  .chart-legend .swatch i.red{background:var(--accent);}
+  .bars{
+    display:grid;
+    grid-template-columns:140px 1fr 80px;
+    align-items:center;
+    gap:16px;
+    padding:12px 0;
+    border-bottom:1px dashed var(--line-2);
+  }
+  .bars:last-child{border-bottom:none;}
+  .bars .lbl{
+    font-family:'JetBrains Mono',monospace;
+    font-size:11px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+  }
+  .bars .lbl span{display:block;color:var(--muted);margin-top:2px;font-size:10px;letter-spacing:0.1em;}
+  .bartrack{
+    height:24px;
+    background:repeating-linear-gradient(45deg,transparent,transparent 4px,var(--paper) 4px,var(--paper) 5px),
+               var(--paper-2);
+    border:1px solid var(--ink);
+    position:relative;
+    overflow:hidden;
+  }
+  .barfill{
+    height:100%;
+    background:var(--ink);
+  }
+  .barfill.red{background:var(--accent);}
+  .barfill.green{background:var(--accent-2);}
+  .barval{
+    font-family:'Newsreader',serif;
+    font-style:italic;
+    font-size:22px;
+    text-align:right;
+  }
+
+  /* ── ARTICLE BODY (drop-cap intro) ── */
+  .article{
+    max-width:1320px;
+    margin:0 auto;
+    padding:80px 40px;
+    border-bottom:1px solid var(--ink);
+    position:relative;z-index:2;
+  }
+  .article-grid{
+    display:grid;
+    grid-template-columns:1fr 2.4fr;
+    gap:64px;
+    align-items:start;
+  }
+  .article-meta{
+    position:sticky;
+    top:24px;
+    font-family:'JetBrains Mono',monospace;
+    font-size:14px;
+    letter-spacing:0.12em;
+    text-transform:uppercase;
+    line-height:1.4;
+  }
+  .article-meta b{
+    display:block;
+    color:var(--accent);
+    margin-bottom:8px;
+    font-weight:600;
+    font-size:11px;
+    letter-spacing:0.18em;
+  }
+  .article-meta .item{
+    border-top:2px solid var(--ink);
+    padding:18px 0;
+    font-weight:500;
+    color:var(--ink);
+  }
+  .article-meta .item:first-child{
+    font-family:'Newsreader',serif;
+    font-style:italic;
+    font-weight:400;
+    font-size:28px;
+    text-transform:none;
+    letter-spacing:-0.015em;
+    line-height:1.05;
+    color:var(--ink);
+  }
+  .article-meta .item:first-child b{
+    font-family:'JetBrains Mono',monospace;
+    font-style:normal;
+  }
+
+  .article-body{
+    font-family:'Newsreader',serif;
+    font-size:21px;
+    line-height:1.55;
+    color:var(--ink);
+  }
+  .article-body p{margin-bottom:24px;}
+  .article-body .lede{
+    font-size:24px;
+    font-weight:400;
+  }
+  .article-body .lede::first-letter{
+    font-family:'Newsreader',serif;
+    font-style:italic;
+    font-weight:400;
+    font-size:96px;
+    float:left;
+    line-height:0.85;
+    margin:8px 12px 0 -2px;
+    color:var(--accent);
+  }
+  .article-body em{font-style:italic;}
+  .article-body strong{font-weight:600;}
+
+  .pullquote{
+    margin:48px -32px;
+    padding:32px;
+    border-top:3px solid var(--ink);
+    border-bottom:3px solid var(--ink);
+    font-family:'Newsreader',serif;
+    font-style:italic;
+    font-weight:400;
+    font-size:30px;
+    line-height:1.3;
+    letter-spacing:-0.01em;
+    position:relative;
+  }
+  .pullquote::before{
+    content:'"';
+    position:absolute;
+    top:18px;left:-18px;
+    background:var(--paper);
+    padding:0 12px;
+    font-size:64px;
+    color:var(--accent);
+    line-height:1;
+  }
+  .pullquote cite{
+    display:block;
+    font-style:normal;
+    font-family:'JetBrains Mono',monospace;
+    font-size:11px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--muted);
+    margin-top:20px;
+  }
+
+  /* ── INTERVENTION (the design proposal) ── */
+  .intervention{
+    max-width:1320px;
+    margin:0 auto;
+    padding:80px 40px;
+    border-bottom:1px solid var(--ink);
+    position:relative;z-index:2;
+  }
+  .interv-head{
+    display:grid;
+    grid-template-columns:auto 1fr;
+    gap:48px;
+    align-items:end;
+    margin-bottom:48px;
+    border-bottom:3px double var(--ink);
+    padding-bottom:32px;
+  }
+  .interv-head .num{
+    font-family:'Newsreader',serif;
+    font-style:italic;
+    font-weight:300;
+    font-size:200px;
+    line-height:0.78;
+    letter-spacing:-0.06em;
+    color:var(--accent);
+  }
+  .interv-head h2{
+    font-family:'Newsreader',serif;
+    font-weight:400;
+    font-size:clamp(36px,5vw,72px);
+    line-height:0.96;
+    letter-spacing:-0.02em;
+  }
+  .interv-head h2 em{font-style:italic;}
+
+  .interv-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr 1fr;
+    gap:32px;
+  }
+
+  .specimen{
+    border:1px solid var(--ink);
+    background:var(--paper-2);
+    padding:24px;
+    position:relative;
+  }
+  .specimen::after{
+    content:attr(data-fig);
+    position:absolute;
+    top:-9px;left:18px;
+    background:var(--paper);
+    padding:0 10px;
+    font-family:'JetBrains Mono',monospace;
+    font-size:10px;
+    letter-spacing:0.14em;
+  }
+  .spec-screen{
+    aspect-ratio:9/16;
+    background:#0d0d0d;
+    border-radius:24px;
+    padding:8px;
+    margin-bottom:20px;
+    position:relative;
+  }
+  .spec-inner{
+    background:var(--paper);
+    border-radius:18px;
+    width:100%;height:100%;
+    padding:20px 16px;
+    overflow:hidden;
+    display:flex;flex-direction:column;
+  }
+  .spec-tab{
+    font-family:'JetBrains Mono',monospace;
+    font-size:9px;
+    letter-spacing:0.18em;
+    text-transform:uppercase;
+    color:var(--muted);
+    margin-bottom:10px;
+  }
+  .spec-h{
+    font-family:'Newsreader',serif;
+    font-size:22px;
+    line-height:1.05;
+    letter-spacing:-0.02em;
+    margin-bottom:16px;
+  }
+  .spec-h em{font-style:italic;color:var(--accent);}
+
+  .row{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--paper-2);font-size:13px;}
+  .row:last-child{border-bottom:none;}
+  .row b{font-weight:500;}
+  .row .stat{
+    font-family:'Newsreader',serif;
+    font-style:italic;
+    font-size:18px;
+  }
+  .stat.red{color:var(--accent);}
+  .stat.green{color:var(--accent-2);}
+
+  .big-figure{
+    font-family:'Newsreader',serif;
+    font-size:64px;
+    line-height:0.95;
+    font-weight:300;
+    letter-spacing:-0.03em;
+    text-align:center;
+    margin:16px 0;
+  }
+  .big-figure em{font-style:italic;color:var(--accent-2);}
+  .big-figure-label{
+    font-family:'JetBrains Mono',monospace;
+    font-size:9px;
+    letter-spacing:0.18em;
+    text-transform:uppercase;
+    color:var(--muted);
+    text-align:center;
+    margin-bottom:12px;
+  }
+
+  .ascii-ring{
+    font-family:'JetBrains Mono',monospace;
+    font-size:11px;
+    line-height:1.1;
+    text-align:center;
+    color:var(--ink-2);
+    white-space:pre;
+    margin:8px 0;
+  }
+  .ascii-ring .red{color:var(--accent);}
+  .ascii-ring .grn{color:var(--accent-2);}
+
+  .specimen .caption{
+    font-family:'Newsreader',serif;
+    font-style:italic;
+    font-size:15px;
+    line-height:1.45;
+    color:var(--ink-2);
+    margin-top:4px;
+  }
+  .specimen .caption b{
+    font-style:normal;
+    font-family:'JetBrains Mono',monospace;
+    font-size:10px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--ink);
+    display:block;
+    margin-bottom:6px;
+  }
+
+  /* ── INTERVIEWS (annotated) ── */
+  .interviews{
+    max-width:1320px;
+    margin:0 auto;
+    padding:80px 40px;
+    border-bottom:1px solid var(--ink);
+    position:relative;z-index:2;
+  }
+  .iv-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:48px;
+    margin-top:48px;
+  }
+  .iv-card{
+    border:1px solid var(--ink);
+    padding:32px;
+    background:var(--paper-2);
+    position:relative;
+  }
+  .iv-card::before{
+    content:attr(data-id);
+    position:absolute;
+    top:-9px;left:24px;
+    background:var(--paper);
+    padding:0 12px;
+    font-family:'JetBrains Mono',monospace;
+    font-size:10px;
+    letter-spacing:0.18em;
+  }
+  .iv-card h3{
+    font-family:'Newsreader',serif;
+    font-weight:400;
+    font-style:italic;
+    font-size:32px;
+    line-height:1.15;
+    letter-spacing:-0.01em;
+    margin-bottom:24px;
+    padding-bottom:16px;
+    border-bottom:1px solid var(--line-2);
+  }
+  .iv-finding{
+    display:flex;
+    gap:14px;
+    padding:14px 0;
+    font-family:'Newsreader',serif;
+    font-size:17px;
+    line-height:1.5;
+    border-bottom:1px dashed var(--line-2);
+  }
+  .iv-finding:last-child{border-bottom:none;}
+  .iv-finding .num{
+    font-family:'JetBrains Mono',monospace;
+    font-size:11px;
+    letter-spacing:0.14em;
+    color:var(--accent);
+    flex-shrink:0;
+    margin-top:6px;
+  }
+  .iv-finding em{font-style:italic;}
+  .iv-finding strong{
+    font-weight:600;
+    background:var(--hilite);
+    padding:0 3px;
+  }
+
+  /* ── PROCESS TIMELINE ── */
+  .timeline{
+    max-width:1320px;
+    margin:0 auto;
+    padding:80px 40px;
+    border-bottom:1px solid var(--ink);
+    position:relative;z-index:2;
+  }
+  .tl-rail{
+    position:relative;
+    margin-top:48px;
+    padding-left:0;
+  }
+  .tl-track{
+    position:absolute;
+    left:24px;top:8px;bottom:8px;
+    width:2px;
+    background:var(--ink);
+  }
+  .tl-row{
+    display:grid;
+    grid-template-columns:64px 1fr 200px;
+    gap:32px;
+    padding:32px 0;
+    border-bottom:1px solid var(--line);
+    align-items:center;
+    position:relative;
+  }
+  .tl-row:last-child{border-bottom:none;}
+  .tl-marker{
+    width:48px;height:48px;
+    border:2px solid var(--ink);
+    background:var(--paper);
+    border-radius:50%;
+    display:grid;place-items:center;
+    font-family:'Newsreader',serif;
+    font-style:italic;
+    font-weight:400;
+    font-size:20px;
+    position:relative;
+    z-index:2;
+  }
+  .tl-row.done .tl-marker{background:var(--ink);color:var(--paper);}
+  .tl-row.active .tl-marker{background:var(--accent);color:var(--paper);border-color:var(--accent);}
+  .tl-content h4{
+    font-family:'Newsreader',serif;
+    font-weight:500;
+    font-size:24px;
+    letter-spacing:-0.015em;
+    margin-bottom:6px;
+  }
+  .tl-content p{
+    font-family:'Newsreader',serif;
+    font-size:16px;
+    color:var(--ink-2);
+    line-height:1.5;
+  }
+  .tl-status{
+    text-align:right;
+    font-family:'JetBrains Mono',monospace;
+    font-size:11px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--muted);
+  }
+  .tl-row.done .tl-status{color:var(--accent-2);}
+  .tl-row.active .tl-status{color:var(--accent);}
+
+  /* ── COLOPHON / TEAM ── */
+  .colophon{
+    max-width:1320px;
+    margin:0 auto;
+    padding:80px 40px 32px;
+    position:relative;z-index:2;
+  }
+  .colo-grid{
+    display:grid;
+    grid-template-columns:1fr 2fr;
+    gap:64px;
+    border-top:3px double var(--ink);
+    padding-top:48px;
+  }
+  .colo-grid h2{
+    font-family:'Newsreader',serif;
+    font-weight:400;
+    font-style:italic;
+    font-size:48px;
+    letter-spacing:-0.02em;
+  }
+  .colo-list{
+    column-count:2;
+    column-gap:48px;
+  }
+  .colo-item{
+    break-inside:avoid;
+    padding:16px 0;
+    border-top:1px solid var(--line);
+  }
+  .colo-item .nm{
+    font-family:'Newsreader',serif;
+    font-size:22px;
+    font-weight:500;
+    letter-spacing:-0.015em;
+    margin-bottom:4px;
+  }
+  .colo-item .rl{
+    font-family:'JetBrains Mono',monospace;
+    font-size:10px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--muted);
+  }
+  .colo-item .id{
+    font-family:'Newsreader',serif;
+    font-style:italic;
+    font-size:14px;
+    color:var(--muted);
+    margin-top:4px;
+  }
+
+  /* ── FOOTER PLATE ── */
+  footer.plate{
+    max-width:1320px;
+    margin:0 auto;
+    padding:32px 40px 64px;
+    border-top:3px double var(--ink);
+    margin-top:48px;
+    position:relative;z-index:2;
+  }
+  .plate-stack{
+    font-family:'Newsreader',serif;
+    font-style:italic;
+    font-weight:300;
+    font-size:clamp(64px,12vw,200px);
+    line-height:0.85;
+    letter-spacing:-0.04em;
+    margin-bottom:32px;
+  }
+  .plate-stack .strike{text-decoration:line-through;color:var(--muted);}
+  .plate-stack em{color:var(--accent);}
+  .plate-foot{
+    display:flex;
+    justify-content:space-between;
+    font-family:'JetBrains Mono',monospace;
+    font-size:11px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--muted);
+    border-top:1px solid var(--ink);
+    padding-top:18px;
+  }
+
+  /* RESPONSIVE */
+  @media (max-width:980px){
+    .masthead{grid-template-columns:1fr;text-align:center;}
+    .masthead-l,.masthead-r{justify-content:center;}
+    .band-grid{grid-template-columns:1fr;gap:32px;}
+    .article-grid{grid-template-columns:1fr;gap:24px;}
+    .article-meta{position:static;}
+    .interv-head{grid-template-columns:1fr;gap:16px;}
+    .interv-head .num{font-size:96px;}
+    .interv-grid{grid-template-columns:1fr;}
+    .iv-grid{grid-template-columns:1fr;}
+    .tl-row{grid-template-columns:48px 1fr;}
+    .tl-status{grid-column:2;text-align:left;margin-top:4px;}
+    .colo-grid{grid-template-columns:1fr;gap:32px;}
+    .colo-list{column-count:1;}
+    .pullquote{margin-left:0;margin-right:0;}
+    .bars{grid-template-columns:1fr;}
+    .barval{text-align:left;}
+    .chart-legend{
+      position:static;
+      margin:16px 0 0;
+      justify-content:flex-start;
+      padding:0;
     }
+  }
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: 'Barlow', sans-serif;
-      min-height: 100vh;
-      overflow-x: hidden;
-    }
-
-    /* ── GRAIN OVERLAY ── */
-    body::before {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
-      pointer-events: none;
-      z-index: 0;
-      opacity: 0.6;
-    }
-
-    /* ── TICKER ── */
-    .ticker {
-      background: var(--accent);
-      color: #0a0a0a;
-      font-family: 'Barlow Condensed', sans-serif;
-      font-weight: 700;
-      font-size: 12px;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      padding: 8px 0;
-      overflow: hidden;
-      white-space: nowrap;
-      position: relative;
-      z-index: 10;
-    }
-
-    .ticker-inner {
-      display: inline-block;
-      animation: ticker 18s linear infinite;
-    }
-
-    .ticker-inner span {
-      margin: 0 48px;
-    }
-
-    @keyframes ticker {
-      0%   { transform: translateX(0); }
-      100% { transform: translateX(-50%); }
-    }
-
-    /* ── NAV ── */
-    nav {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 24px 48px;
-      border-bottom: 1px solid var(--border);
-      position: relative;
-      z-index: 10;
-    }
-
-    .nav-logo {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-weight: 900;
-      font-size: 20px;
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
-      color: var(--text);
-    }
-
-    .nav-logo span {
-      color: var(--accent);
-    }
-
-    .nav-tag {
-      font-size: 12px;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--muted);
-    }
-
-    /* ── HERO ── */
-    .hero {
-      position: relative;
-      z-index: 10;
-      padding: 100px 48px 80px;
-      max-width: 1100px;
-      margin: 0 auto;
-    }
-
-    .hero-eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 11px;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 32px;
-      font-family: 'Barlow Condensed', sans-serif;
-      font-weight: 700;
-    }
-
-    .hero-eyebrow::before {
-      content: '';
-      display: block;
-      width: 32px;
-      height: 1px;
-      background: var(--accent);
-    }
-
-    .hero h1 {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-weight: 900;
-      font-size: clamp(72px, 12vw, 160px);
-      line-height: 0.9;
-      text-transform: uppercase;
-      letter-spacing: -0.01em;
-      margin-bottom: 48px;
-    }
-
-    .hero h1 .line-accent {
-      color: var(--accent);
-      display: block;
-    }
-
-    .hero h1 .line-outline {
-      -webkit-text-stroke: 1px var(--border);
-      color: #3a3a3a;
-      display: block;
-    }
-
-    .hero-meta {
-      display: flex;
-      align-items: flex-start;
-      gap: 64px;
-      padding-top: 48px;
-      border-top: 1px solid var(--border);
-    }
-
-    .meta-block {
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-    }
-
-    .meta-label {
-      font-size: 10px;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--muted);
-      font-family: 'Barlow Condensed', sans-serif;
-    }
-
-    .meta-value {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-weight: 700;
-      font-size: 16px;
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
-      color: var(--text);
-    }
-
-    /* ── STATUS SECTION ── */
-    .status-section {
-      position: relative;
-      z-index: 10;
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 0 48px 80px;
-    }
-
-    .status-card {
-      border: 1px solid var(--border);
-      border-radius: 4px;
-      padding: 48px;
-      background: var(--surface);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 48px;
-    }
-
-    .status-left h2 {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-weight: 900;
-      font-size: 36px;
-      text-transform: uppercase;
-      letter-spacing: 0.04em;
-      margin-bottom: 12px;
-    }
-
-    .status-left p {
-      font-size: 15px;
-      color: var(--mid);
-      line-height: 1.6;
-      max-width: 400px;
-    }
-
-    .status-badge {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 10px;
-      flex-shrink: 0;
-    }
-
-    .badge-dot {
-      width: 80px;
-      height: 80px;
-      border-radius: 50%;
-      border: 2px solid var(--accent);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-    }
-
-    .badge-dot::before {
-      content: '';
-      width: 12px;
-      height: 12px;
-      background: var(--accent);
-      border-radius: 50%;
-      animation: pulse 2s ease-in-out infinite;
-    }
-
-    @keyframes pulse {
-      0%, 100% { transform: scale(1); opacity: 1; }
-      50%       { transform: scale(1.4); opacity: 0.5; }
-    }
-
-    .badge-label {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 11px;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--accent);
-      font-weight: 700;
-    }
-
-    /* ── PHASES ── */
-    .phases {
-      position: relative;
-      z-index: 10;
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 0 48px 100px;
-    }
-
-    .phases-header {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 11px;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin-bottom: 24px;
-      font-weight: 700;
-    }
-
-    .phase-list {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 1px;
-      background: var(--border);
-      border: 1px solid var(--border);
-      border-radius: 4px;
-      overflow: hidden;
-    }
-
-    .phase-item {
-      background: var(--surface);
-      padding: 28px 24px;
-      position: relative;
-    }
-
-    .phase-item.done {
-      background: var(--bg);
-    }
-
-    .phase-num {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-weight: 900;
-      font-size: 48px;
-      color: var(--border);
-      line-height: 1;
-      margin-bottom: 12px;
-    }
-
-    .phase-item.done .phase-num {
-      color: var(--accent);
-    }
-
-    .phase-title {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-weight: 700;
-      font-size: 14px;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      margin-bottom: 6px;
-      color: var(--text);
-    }
-
-    .phase-item:not(.done) .phase-title {
-      color: var(--muted);
-    }
-
-    .phase-desc {
-      font-size: 12px;
-      color: var(--muted);
-      line-height: 1.5;
-    }
-
-    .phase-status {
-      position: absolute;
-      top: 16px;
-      right: 16px;
-      font-size: 10px;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      font-family: 'Barlow Condensed', sans-serif;
-      font-weight: 700;
-    }
-
-    .phase-status.complete { color: var(--accent); }
-    .phase-status.pending  { color: var(--muted); }
-
-    /* ── FOOTER ── */
-    footer {
-      position: relative;
-      z-index: 10;
-      border-top: 1px solid var(--border);
-      padding: 24px 48px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    footer p {
-      font-size: 12px;
-      color: var(--muted);
-      letter-spacing: 0.05em;
-    }
-
-    footer a {
-      font-size: 12px;
-      color: var(--accent);
-      text-decoration: none;
-      letter-spacing: 0.05em;
-      font-family: 'Barlow Condensed', sans-serif;
-      font-weight: 700;
-      text-transform: uppercase;
-    }
-
-    /* ── RESPONSIVE ── */
-    @media (max-width: 768px) {
-      nav, .hero, .status-section, .phases, footer {
-        padding-left: 24px;
-        padding-right: 24px;
-      }
-
-      .hero { padding-top: 60px; }
-
-      .hero-meta {
-        flex-direction: column;
-        gap: 24px;
-      }
-
-      .status-card {
-        flex-direction: column;
-        align-items: flex-start;
-        padding: 32px 24px;
-      }
-
-      .phase-list {
-        grid-template-columns: 1fr 1fr;
-      }
-    }
-
-    /* ── ENTRANCE ANIMATIONS ── */
-    .hero-eyebrow { animation: fadeUp 0.6s ease both; }
-    .hero h1      { animation: fadeUp 0.6s 0.1s ease both; }
-    .hero-meta    { animation: fadeUp 0.6s 0.2s ease both; }
-    .status-card  { animation: fadeUp 0.6s 0.3s ease both; }
-    .phase-list   { animation: fadeUp 0.6s 0.4s ease both; }
-
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(20px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-  </style>
+  /* entrance */
+  .reveal{opacity:0;transform:translateY(20px);animation:rv .9s cubic-bezier(.2,.8,.2,1) forwards;}
+  @keyframes rv{to{opacity:1;transform:translateY(0);}}
+  .d1{animation-delay:.05s;} .d2{animation-delay:.18s;}
+  .d3{animation-delay:.32s;} .d4{animation-delay:.46s;}
+</style>
 </head>
 <body>
 
-  <!-- TICKER -->
-  <div class="ticker">
-    <div class="ticker-inner">
-      <span>Case Study in Progress</span>
-      <span>·</span>
-      <span>UX Research</span>
-      <span>·</span>
-      <span>Product Design</span>
-      <span>·</span>
-      <span>Coming Soon</span>
-      <span>·</span>
-      <span>Case Study in Progress</span>
-      <span>·</span>
-      <span>UX Research</span>
-      <span>·</span>
-      <span>Product Design</span>
-      <span>·</span>
-      <span>Coming Soon</span>
-      <span>·</span>
+  <!-- MASTHEAD -->
+  <div class="masthead">
+    <div class="masthead-l">
+      <span>UCSD COGS 127</span>
+    </div>
+    <div class="nameplate">Screen Time&nbsp;Review</div>
+    <div class="masthead-r">
+      <span>Spring 2026</span>
     </div>
   </div>
-
-  <!-- NAV -->
-  <nav>
-    <div class="nav-logo">Case<span>.</span>Study</div>
-    <div class="nav-tag">UCSD · UX Design · Spring 2026</div>
-  </nav>
 
   <!-- HERO -->
-  <div class="hero">
-    <div class="hero-eyebrow">Work in progress</div>
-    <h1>
-      <span class="line-outline">Coming</span>
-      <span class="line-accent">Soon.</span>
+  <section class="hero">
+    <div class="kicker reveal d1">A field study in adolescent screen behavior</div>
+
+    <h1 class="headline reveal d2">
+      <em>Earn</em> the scroll.<br/>
+      What if Apple Health<br/>
+      sold <span class="ul">screen time</span> by the step?
     </h1>
-    <div class="hero-meta">
-      <div class="meta-block">
-        <span class="meta-label">Course</span>
-        <span class="meta-value">UX / Product Design</span>
+
+    <p class="deck reveal d3">
+      Eighty percent of adolescents don't move enough. The same kids spend more than eight hours a day on screens. We sat down with their parents, mapped out the problem, and propose an extension to Apple Health that turns daily activity into the price of admission to the apps kids already love.
+    </p>
+  </section>
+
+  <!-- DATA BAND -->
+  <section class="data-band">
+    <div class="band-tag">§ 01 — The numbers behind the problem</div>
+
+    <div class="band-grid">
+      <div class="band-cell">
+        <div class="figure"><em>80</em><span class="accent"><em>%</em></span></div>
+        <p class="descr">of adolescents worldwide fail to meet recommended daily physical activity levels.</p>
+        <div class="src">Source · World Health Organization</div>
       </div>
-      <div class="meta-block">
-        <span class="meta-label">Team</span>
-        <span class="meta-value">TBD</span>
+      <div class="band-cell">
+        <div class="figure"><em>8.5</em><span class="accent"><em>h</em></span></div>
+        <p class="descr">average daily screen time among teenagers aged 13&ndash;18.</p>
+        <div class="src">Source · American Academy of Pediatrics</div>
       </div>
-      <div class="meta-block">
-        <span class="meta-label">Focus Area</span>
-        <span class="meta-value">TBD</span>
-      </div>
-      <div class="meta-block">
-        <span class="meta-label">Status</span>
-        <span class="meta-value" style="color: var(--accent);">In Progress</span>
+      <div class="band-cell">
+        <div class="figure"><em>5.5</em><span class="accent"><em>h</em></span></div>
+        <p class="descr">average daily screen time among <em>tweens</em> aged 8&ndash;12 — already over a third of waking hours.</p>
+        <div class="src">Source · Common Sense Census 2021</div>
       </div>
     </div>
-  </div>
 
-  <!-- STATUS -->
-  <div class="status-section">
-    <div class="status-card">
-      <div class="status-left">
-        <h2>This page is a placeholder</h2>
+    <div class="chart-block">
+      <div class="chart-legend">
+        <span class="swatch"><i class="green"></i>Active</span>
+        <span class="swatch"><i class="red"></i>Screen</span>
+      </div>
+      <div class="bars">
+        <div class="lbl">School day<span>Active hrs</span></div>
+        <div class="bartrack"><div class="barfill green" style="width:18%"></div></div>
+        <div class="barval"><em>1.4 h</em></div>
+      </div>
+      <div class="bars">
+        <div class="lbl">School day<span>Screen hrs</span></div>
+        <div class="bartrack"><div class="barfill red" style="width:74%"></div></div>
+        <div class="barval"><em>5.9 h</em></div>
+      </div>
+      <div class="bars">
+        <div class="lbl">Weekend<span>Active hrs</span></div>
+        <div class="bartrack"><div class="barfill green" style="width:25%"></div></div>
+        <div class="barval"><em>2.0 h</em></div>
+      </div>
+      <div class="bars">
+        <div class="lbl">Weekend<span>Screen hrs</span></div>
+        <div class="bartrack"><div class="barfill red" style="width:96%"></div></div>
+        <div class="barval"><em>8.5 h</em></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ARTICLE -->
+  <section class="article">
+    <div class="article-grid">
+      <aside class="article-meta">
+        <div class="item"><b>Section</b>02 / The Brief</div>
+        <div class="item"><b>Filed</b>Apr 2026</div>
+        <div class="item"><b>Tags</b>Health · Screen time · Adolescents · Apple ecosystem</div>
+        <div class="item"><b>Status</b>Research complete · Design in progress</div>
+      </aside>
+
+      <div class="article-body">
+        <p class="lede">
+          The fight starts the same way every afternoon. The phone has been out for hours. A parent says <em>five more minutes</em>. A child says <em>five more minutes</em>. Someone yells. The phone goes back into a pocket. Tomorrow, it happens again.
+        </p>
+
         <p>
-          The full case study is currently being developed as part of a UX design course at UC San Diego.
-          Check back later for research findings, design decisions, and final deliverables.
+          Apple already ships two of the most powerful behavioral tools on a teenager's phone: <strong>Screen Time</strong> and <strong>Health</strong>. One restricts. The other measures. Neither rewards. The result is an ecosystem that knows your child is sedentary, knows exactly which apps they're sedentary <em>on</em>, and does nothing to connect the two.
+        </p>
+
+        <p>
+          Our proposal extends Apple Health with a simple inversion: instead of restricting apps with timers, the apps stay locked by default and activity unlocks them. A daily step goal isn't a chore. It's a price tag. Steps are currency. Minutes on Instagram are the product.
+        </p>
+
+        <div class="pullquote">
+          It feels like taking any toy away from a kid &mdash; there's this <em>tantrumy reaction</em> he has.
+          <cite>— Interview 02, parent of a 12-year-old</cite>
+        </div>
+
+        <p>
+          Across two parent interviews, every challenge they described traced back to the same root: <em>the rules feel arbitrary</em>. Screen time is taken away in the moment, by a parent who is themselves on a phone, while a child is mid-game with friends online. The rule isn't predictable. It isn't earned. It isn't fair.
+        </p>
+
+        <p>
+          Our design tries to make the rule into a system. Once a parent and child set the activity-to-app exchange together, the daily negotiation moves out of the dinner table and into a transparent dashboard. The argument doesn't disappear, but it shifts: from <em>can I have my phone</em> to <em>I'll go on a walk first</em>.
         </p>
       </div>
-      <div class="status-badge">
-        <div class="badge-dot"></div>
-        <div class="badge-label">Live Soon</div>
-      </div>
     </div>
-  </div>
+  </section>
 
-  <!-- PHASES -->
-  <div class="phases">
-    <div class="phases-header">Project Phases</div>
-    <div class="phase-list">
-
-      <div class="phase-item done">
-        <span class="phase-status complete">✓ Done</span>
-        <div class="phase-num">01</div>
-        <div class="phase-title">Discovery</div>
-        <div class="phase-desc">Define user populations and narrow the problem space.</div>
-      </div>
-
-      <div class="phase-item">
-        <span class="phase-status pending">Upcoming</span>
-        <div class="phase-num">02</div>
-        <div class="phase-title">Research</div>
-        <div class="phase-desc">User interviews, competitive analysis, and synthesis.</div>
-      </div>
-
-      <div class="phase-item">
-        <span class="phase-status pending">Upcoming</span>
-        <div class="phase-num">03</div>
-        <div class="phase-title">Design</div>
-        <div class="phase-desc">Wireframes, prototypes, and usability testing.</div>
-      </div>
-
-      <div class="phase-item">
-        <span class="phase-status pending">Upcoming</span>
-        <div class="phase-num">04</div>
-        <div class="phase-title">Write-up</div>
-        <div class="phase-desc">Final case study documentation and presentation.</div>
-      </div>
-
+  <!-- INTERVIEWS -->
+  <section class="interviews">
+    <div class="interv-head">
+      <div class="num">03</div>
+      <h2>From the <em>field</em> &mdash; what the parents said.</h2>
     </div>
-  </div>
 
-  <!-- FOOTER -->
-  <footer>
-    <p>© 2026 · UCSD UX Design</p>
-    <a href="index.html">← Back to portfolio</a>
+    <p style="font-family:'Newsreader';font-size:18px;line-height:1.5;color:var(--ink-2);max-width:780px;font-style:italic;">
+      Two semi-structured interviews. One with the parent of a 9-year-old whose routine is tightly controlled and who naturally chooses activity. One with the parent of a 12-year-old whose screen use has become a social lifeline he is afraid to disconnect from. Together, they describe the spectrum.
+    </p>
+
+    <div class="iv-grid">
+      <article class="iv-card" data-id="INTERVIEW · 01 · PARENT, DAUGHTER 9">
+        <h3>"She naturally gravitates toward it &mdash; we just try not to overdo the reward."</h3>
+
+        <div class="iv-finding">
+          <span class="num">01</span>
+          <p>Screens are <em>always last</em>: school, homework, outside, then maybe a tablet. The order is non-negotiable and predictable.</p>
+        </div>
+        <div class="iv-finding">
+          <span class="num">02</span>
+          <p>The structure mostly works because <strong>the child enjoys the activity itself</strong>. Pool, sports, outdoor play.</p>
+        </div>
+        <div class="iv-finding">
+          <span class="num">03</span>
+          <p>Concern: making activity feel <em>transactional</em>. "I just don't want her doing it for the screen time."</p>
+        </div>
+      </article>
+
+      <article class="iv-card" data-id="INTERVIEW · 02 · PARENT, SON 12">
+        <h3>"His screen time drops when he has practice. Without it, it skyrockets."</h3>
+
+        <div class="iv-finding">
+          <span class="num">01</span>
+          <p>Screen use is <strong>tightly linked to peer connection</strong>: group chats, online matches, planning meet-ups at the YMCA.</p>
+        </div>
+        <div class="iv-finding">
+          <span class="num">02</span>
+          <p>Restrictions cause <em>physical reactions</em> &mdash; tantrums, blame-shifting, "well, you're on your phone too."</p>
+        </div>
+        <div class="iv-finding">
+          <span class="num">03</span>
+          <p>Suggested benefit of our system: <strong>removes the argument</strong>. Rules are clear, objective, not parental whim.</p>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- PLATE -->
+  <footer class="plate">
+    <div class="plate-stack">
+      <span class="strike">Restrict.</span><br/>
+      <em>Reward.</em>
+    </div>
+    <div class="plate-foot">
+      <span>© UCSD COGS 127</span>
+      <span>Screen Time Review</span>
+      <span>Spring 2026</span>
+    </div>
   </footer>
 
 </body>
