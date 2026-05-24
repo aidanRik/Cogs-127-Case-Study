@@ -757,6 +757,242 @@
     padding-top:18px;
   }
 
+  /* ── PROTOTYPE SECTION ── */
+  .prototypes{
+    max-width:1320px;
+    margin:0 auto;
+    padding:80px 40px;
+    border-bottom:1px solid var(--ink);
+    position:relative;z-index:2;
+  }
+  .proto-intro{
+    display:grid;
+    grid-template-columns:1fr 2.4fr;
+    gap:64px;
+    margin-bottom:72px;
+    align-items:start;
+  }
+  .proto-intro-label{
+    position:sticky;
+    top:24px;
+    font-family:'JetBrains Mono',monospace;
+    font-size:11px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+  }
+  .proto-intro-label .section-num{
+    display:block;
+    font-family:'Newsreader',serif;
+    font-style:italic;
+    font-weight:300;
+    font-size:96px;
+    line-height:0.9;
+    letter-spacing:-0.04em;
+    color:var(--accent);
+    margin-bottom:16px;
+  }
+  .proto-intro-label .section-name{
+    display:block;
+    border-top:2px solid var(--ink);
+    padding-top:12px;
+    font-size:12px;
+    color:var(--muted);
+  }
+  .proto-intro-body{
+    font-family:'Newsreader',serif;
+    font-size:21px;
+    line-height:1.55;
+  }
+  .proto-intro-body p{margin-bottom:20px;}
+  .proto-intro-body em{font-style:italic;}
+  .proto-intro-body strong{font-weight:600;}
+
+  /* Featured prototype — full-width iframe embed */
+  .proto-featured{
+    border:1px solid var(--ink);
+    background:var(--paper-2);
+    margin-bottom:64px;
+    position:relative;
+  }
+  .proto-featured::before{
+    content:attr(data-fig);
+    position:absolute;
+    top:-9px;left:18px;
+    background:var(--paper);
+    padding:0 10px;
+    font-family:'JetBrains Mono',monospace;
+    font-size:10px;
+    letter-spacing:0.14em;
+    z-index:3;
+  }
+  .proto-featured iframe{
+    width:100%;
+    height:680px;
+    border:none;
+    display:block;
+  }
+  .proto-featured-caption{
+    padding:24px 32px;
+    border-top:1px solid var(--line);
+    display:grid;
+    grid-template-columns:1fr 2fr;
+    gap:48px;
+  }
+  .proto-featured-caption .cap-label{
+    font-family:'JetBrains Mono',monospace;
+    font-size:11px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--accent);
+    margin-bottom:8px;
+  }
+  .proto-featured-caption .cap-title{
+    font-family:'Newsreader',serif;
+    font-weight:500;
+    font-size:22px;
+    letter-spacing:-0.015em;
+    margin-bottom:8px;
+  }
+  .proto-featured-caption .cap-body{
+    font-family:'Newsreader',serif;
+    font-style:italic;
+    font-size:17px;
+    line-height:1.5;
+    color:var(--ink-2);
+  }
+  .proto-featured-caption .cap-why{
+    font-family:'Newsreader',serif;
+    font-size:16px;
+    line-height:1.55;
+    color:var(--ink-2);
+  }
+  .proto-featured-caption .cap-why b{
+    display:block;
+    font-family:'JetBrains Mono',monospace;
+    font-size:10px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--ink);
+    margin-bottom:8px;
+    font-style:normal;
+  }
+
+  /* Two-column proto pair */
+  .proto-pair{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:32px;
+    margin-bottom:64px;
+  }
+  .proto-card{
+    border:1px solid var(--ink);
+    background:var(--paper-2);
+    position:relative;
+  }
+  .proto-card::before{
+    content:attr(data-fig);
+    position:absolute;
+    top:-9px;left:18px;
+    background:var(--paper);
+    padding:0 10px;
+    font-family:'JetBrains Mono',monospace;
+    font-size:10px;
+    letter-spacing:0.14em;
+    z-index:3;
+  }
+  .proto-card iframe{
+    width:100%;
+    height:520px;
+    border:none;
+    display:block;
+  }
+  .proto-card-caption{
+    padding:20px 24px;
+    border-top:1px solid var(--line);
+  }
+  .proto-card-caption .cap-label{
+    font-family:'JetBrains Mono',monospace;
+    font-size:10px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--accent);
+    margin-bottom:6px;
+  }
+  .proto-card-caption .cap-title{
+    font-family:'Newsreader',serif;
+    font-weight:500;
+    font-size:20px;
+    letter-spacing:-0.015em;
+    margin-bottom:8px;
+  }
+  .proto-card-caption .cap-body{
+    font-family:'Newsreader',serif;
+    font-style:italic;
+    font-size:15px;
+    line-height:1.5;
+    color:var(--ink-2);
+    margin-bottom:10px;
+  }
+  .proto-card-caption .cap-why{
+    font-family:'Newsreader',serif;
+    font-size:14px;
+    line-height:1.5;
+    color:var(--ink-2);
+  }
+  .proto-card-caption .cap-why b{
+    display:block;
+    font-family:'JetBrains Mono',monospace;
+    font-size:9px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--muted);
+    margin-bottom:4px;
+    font-style:normal;
+  }
+
+  /* Design rationale callout strip */
+  .design-principle{
+    border-top:3px solid var(--ink);
+    border-bottom:1px solid var(--line);
+    padding:32px 0;
+    margin-bottom:48px;
+    display:grid;
+    grid-template-columns:200px 1fr 1fr 1fr;
+    gap:32px;
+    align-items:start;
+  }
+  .design-principle .dp-label{
+    font-family:'JetBrains Mono',monospace;
+    font-size:11px;
+    letter-spacing:0.18em;
+    text-transform:uppercase;
+    color:var(--accent);
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+  .design-principle .dp-label::before{
+    content:'';
+    display:block;
+    width:3px;height:24px;
+    background:var(--accent);
+  }
+  .design-principle .dp-item{}
+  .design-principle .dp-item .dp-name{
+    font-family:'Newsreader',serif;
+    font-weight:500;
+    font-size:18px;
+    margin-bottom:6px;
+    letter-spacing:-0.01em;
+  }
+  .design-principle .dp-item .dp-desc{
+    font-family:'Newsreader',serif;
+    font-style:italic;
+    font-size:15px;
+    line-height:1.5;
+    color:var(--ink-2);
+  }
+
   /* RESPONSIVE */
   @media (max-width:980px){
     .masthead{grid-template-columns:1fr;text-align:center;}
@@ -773,6 +1009,12 @@
     .colo-grid{grid-template-columns:1fr;gap:32px;}
     .colo-list{column-count:1;}
     .pullquote{margin-left:0;margin-right:0;}
+    .proto-intro{grid-template-columns:1fr;gap:24px;}
+    .proto-intro-label{position:static;}
+    .proto-intro-label .section-num{font-size:64px;}
+    .proto-featured-caption{grid-template-columns:1fr;}
+    .proto-pair{grid-template-columns:1fr;}
+    .design-principle{grid-template-columns:1fr;gap:20px;}
     .bars{grid-template-columns:1fr;}
     .barval{text-align:left;}
     .chart-legend{
@@ -953,6 +1195,134 @@
         </div>
       </article>
     </div>
+  </section>
+
+  <!-- HIGH-FIDELITY PROTOTYPES -->
+  <section class="prototypes">
+
+    <!-- Section intro -->
+    <div class="proto-intro">
+      <div class="proto-intro-label">
+        <span class="section-num">04</span>
+        <span class="section-name">High-Fidelity Prototypes</span>
+      </div>
+      <div class="proto-intro-body">
+        <p>
+          The following screens represent the unfinished <em>Earn Your Screen</em> system, an extension of Apple Health that turns daily physical activity into a transparent, negotiated currency for app access. Each flow was designed to serve a distinct moment in the parent-child dynamic: setup, enforcement, negotiation, and reflection.
+        </p>
+        <p>
+          Rather than a punitive restriction model, every screen is framed around <strong>agency and clarity</strong>. Kids see exactly what they've earned and what's left over. Parents set expectations once, then step back. The system argues for them.
+        </p>
+      </div>
+    </div>
+
+    <!-- Design principles strip -->
+    <div class="design-principle">
+      <div class="dp-label">Design rationale</div>
+      <div class="dp-item">
+        <div class="dp-name">Transparency first</div>
+        <div class="dp-desc">Every rule is visible to both parent and child. No surprises, no arbitrary enforcement.</div>
+      </div>
+      <div class="dp-item">
+        <div class="dp-name">Earn, don't plead</div>
+        <div class="dp-desc">Activity unlocks screen time automatically. No asking, no negotiation in the moment.</div>
+      </div>
+      <div class="dp-item">
+        <div class="dp-name">Fit Apple's language</div>
+        <div class="dp-desc">UI patterns mirror Health and Screen Time so the system feels native, not foreign.</div>
+      </div>
+    </div>
+
+    <!-- FEATURED: App Intercept — most dramatic moment of the system -->
+    <div class="proto-featured" data-fig="FIG. 02 — APP LAUNCH INTERCEPT · THE CORE MOMENT">
+      <iframe src="App-Launch-Intercept.html" title="App Launch Intercept" loading="lazy"></iframe>
+      <div class="proto-featured-caption">
+        <div>
+          <div class="cap-label">Flow 01 · Critical Path</div>
+          <div class="cap-title">App Launch Intercept</div>
+          <div class="cap-body">The moment a child tries to open a restricted app before earning screen time — the system's most visible touchpoint.</div>
+        </div>
+        <div class="cap-why">
+          <b>Why this screen matters</b>
+          This is the product's core behavior loop. Rather than a blunt lock screen, the intercept shows the child <em>exactly</em> how close they are to earning access — steps completed, steps remaining, and a direct path to go earn the rest. The design deliberately avoids shame or punishment language; instead it presents a clear, achievable transaction. Research from our parent interviews showed that arbitrary restrictions cause the strongest emotional reactions. Making the rule visible and the path forward immediate is the primary design response to that finding.
+        </div>
+      </div>
+    </div>
+
+    <!-- PAIR: Onboarding + Move to Unlock -->
+    <div class="proto-pair">
+      <div class="proto-card" data-fig="FIG. 03 — ONBOARDING">
+        <iframe src="Earn-Your-Screen-Onboarding.html" title="Onboarding Flow" loading="lazy"></iframe>
+        <div class="proto-card-caption">
+          <div class="cap-label">Flow 02 · Setup</div>
+          <div class="cap-title">Earn Your Screen — Onboarding</div>
+          <div class="cap-body">Parent and child configure the activity-to-app exchange together for the first time.</div>
+          <div class="cap-why">
+            <b>Why this matters</b>
+            Joint setup is intentional. When a child participates in defining the rules, enforcement shifts from parental authority to a shared agreement. The onboarding frames screen time not as a privilege to be restricted but as a reward to be earned — establishing the right mental model from day one. This directly addresses Interview 01's concern about making activity feel coercive: if the child helps set the goal, the goal belongs to them.
+          </div>
+        </div>
+      </div>
+
+      <div class="proto-card" data-fig="FIG. 04 — MOVE TO UNLOCK">
+        <iframe src="Move to Unlock.html" title="Move to Unlock" loading="lazy"></iframe>
+        <div class="proto-card-caption">
+          <div class="cap-label">Flow 03 · Unlock Flow</div>
+          <div class="cap-title">Move to Unlock</div>
+          <div class="cap-body">The step-by-step unlock sequence that converts physical activity into earned screen minutes.</div>
+          <div class="cap-why">
+            <b>Why this matters</b>
+            The unlock screen borrows the ritual of Apple Pay — a deliberate, satisfying micro-moment that makes earning feel real. Progress is shown in physical terms (steps, distance) rather than abstract time, grounding the reward in tangible effort. The visual design mirrors Apple Health's ring metaphor so the behavior feels continuous with what the OS already teaches.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PAIR: Goal Management + Parent Approval -->
+    <div class="proto-pair">
+      <div class="proto-card" data-fig="FIG. 05 — GOAL MANAGEMENT">
+        <iframe src="Goal-Management.html" title="Goal Management" loading="lazy"></iframe>
+        <div class="proto-card-caption">
+          <div class="cap-label">Flow 04 · Configuration</div>
+          <div class="cap-title">Goal Management</div>
+          <div class="cap-body">Parents adjust daily activity targets and the app-by-app exchange rates over time.</div>
+          <div class="cap-why">
+            <b>Why this matters</b>
+            Static rules become unfair rules. A 9-year-old's activity level and a 14-year-old's social needs are different. Goal Management gives parents a living dashboard to adapt the system as their child grows, as seasons change, or as a reward for a good week. It also surfaces aggregate data — showing parents patterns rather than just today's snapshot.
+          </div>
+        </div>
+      </div>
+
+      <div class="proto-card" data-fig="FIG. 06 — PARENT ↔ CHILD APPROVAL">
+        <iframe src="Parent-Child-Approval.html" title="Parent-Child Approval" loading="lazy"></iframe>
+        <div class="proto-card-caption">
+          <div class="cap-label">Flow 05 · Negotiation</div>
+          <div class="cap-title">Parent ↔ Child Approval Loop</div>
+          <div class="cap-body">When a child needs an exception — sick day, school event — they request it and a parent approves or denies.</div>
+          <div class="cap-why">
+            <b>Why this matters</b>
+            No system survives contact with real life without an escape valve. The approval loop preserves parental authority for genuine exceptions without making the exception the norm. Crucially, the request comes from the child — they initiate the conversation rather than the parent making a unilateral call. This keeps the dynamic collaborative and teaches kids to articulate their needs rather than react emotionally.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FEATURED: Daily Summary -->
+    <div class="proto-featured" data-fig="FIG. 07 — DAILY SUMMARY &amp; STREAKS · CLOSING THE LOOP">
+      <iframe src="Daily-Summary.html" title="Daily Summary and Streaks" loading="lazy"></iframe>
+      <div class="proto-featured-caption">
+        <div>
+          <div class="cap-label">Flow 06 · Reflection</div>
+          <div class="cap-title">Daily Summary &amp; Streaks</div>
+          <div class="cap-body">End-of-day recap showing activity completed, screen time earned, and streak progress toward longer-term goals.</div>
+        </div>
+        <div class="cap-why">
+          <b>Why this screen matters</b>
+          Behavioral change research consistently shows that feedback loops — seeing your progress — are as important as the incentive itself. The Daily Summary closes the loop: it makes the day's effort legible and celebrates it. Streaks extend the time horizon beyond a single day, creating a longer-term investment that makes kids less likely to break the habit. For parents, the summary replaces the nightly interrogation ("did you hit your steps?") with a shared artifact. The conversation moves from accusation to review.
+        </div>
+      </div>
+    </div>
+
   </section>
 
   <!-- PLATE -->
