@@ -353,6 +353,35 @@
   .article-body em{font-style:italic;}
   .article-body strong{font-weight:600;}
 
+  /* ── PROBLEM STATEMENT ── */
+  .problem-statement{
+    margin-top:40px;
+    border-left:3px solid var(--accent);
+    padding:24px 32px;
+    background:var(--paper-2);
+  }
+  .problem-statement .ps-label{
+    font-family:'JetBrains Mono',monospace;
+    font-size:10px;
+    letter-spacing:0.2em;
+    text-transform:uppercase;
+    color:var(--accent);
+    margin-bottom:12px;
+  }
+  .problem-statement p{
+    font-family:'Newsreader',serif;
+    font-size:20px;
+    line-height:1.6;
+    color:var(--ink-2);
+    font-style:italic;
+    margin:0;
+  }
+  .problem-statement p strong{
+    font-style:normal;
+    font-weight:600;
+    color:var(--ink);
+  }
+
   .pullquote{
     margin:48px -32px;
     padding:32px;
@@ -1430,8 +1459,13 @@
     </h1>
 
     <p class="deck reveal d3">
-      Eighty percent of adolescents don't move enough. The same kids spend more than eight hours a day on screens. We sat down with their parents, mapped out the problem, and propose an extension to Apple Health that turns daily activity into the price of admission to the apps kids already love.
+      Activity earns screen time, designing a fair system for families who argue about the phone.
     </p>
+
+    <div class="problem-statement reveal d4">
+      <div class="ps-label">Problem Statement</div>
+      <p><strong>Parents of adolescents need a way to enforce screen time that feels objective and transparent to their kids</strong> - because when limits feel arbitrary, the daily fight about the phone becomes a fight about trust, and no amount of parental authority makes the rules feel fair to anyone involved.</p>
+    </div>
   </section>
 
   <!-- DATA BAND -->
@@ -1491,7 +1525,7 @@
         <div class="item"><b>Section</b>02 / The Brief</div>
         <div class="item"><b>Filed</b>Apr 2026</div>
         <div class="item"><b>Tags</b>Health · Screen time · Adolescents · Apple ecosystem</div>
-        <div class="item"><b>Status</b>Research complete · Design in progress</div>
+        <div class="item"><b>Status</b>Research complete · Design complete</div>
       </aside>
 
       <div class="article-body">
