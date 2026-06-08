@@ -1616,10 +1616,10 @@
       </div>
       <div class="proto-intro-body">
         <p>
-          The following screens represent the unfinished <em>Earn Your Screen</em> system, an extension of Apple Health that turns daily physical activity into a transparent, negotiated currency for app access. Each flow was designed to serve a distinct moment in the parent-child dynamic: setup, enforcement, negotiation, and reflection.
+          The following screens represent the complete <em>Earn Your Screen</em> system — an extension of Apple Health that turns daily physical activity into a transparent, negotiated currency for app access. Each flow was designed to serve a distinct moment in the parent-child dynamic: setup, enforcement, negotiation, and reflection.
         </p>
         <p>
-          Rather than a punitive restriction model, every screen is framed around <strong>agency and clarity</strong>. Kids see exactly what they've earned and what's left over. Parents set expectations once, then step back. The system argues for them.
+          Rather than a punitive restriction model, every screen is framed around <strong>agency and clarity</strong>. Kids see exactly what they've earned and what's left. Parents set expectations once, then step back. The system argues for them.
         </p>
       </div>
     </div>
@@ -1641,61 +1641,92 @@
       </div>
     </div>
 
-    <!-- FEATURED: App Intercept — most dramatic moment of the system -->
-    <div class="proto-featured" data-fig="FIG. 02 · APP LAUNCH INTERCEPT · THE CORE MOMENT">
+    <!-- FIG. 02 · ONBOARDING (featured full-width) -->
+    <div class="proto-featured" data-fig="FIG. 02 · ONBOARDING · FIRST-TIME SETUP">
+      <iframe src="screens/Earn-Your-Screen-Onboarding.html" title="Onboarding" loading="lazy"></iframe>
+      <div class="proto-featured-caption">
+        <div>
+          <div class="cap-label">Flow 01 · Setup</div>
+          <div class="cap-title">Move to Unlock — Onboarding</div>
+          <div class="cap-body">Parent and child configure the activity-to-app exchange together. Role picker, first goal, and app restrictions in three steps.</div>
+        </div>
+        <div class="cap-why">
+          <b>Why this screen matters</b>
+          Joint setup is intentional. When a child participates in defining the rules, enforcement shifts from parental authority to a shared agreement. The onboarding frames screen time not as a privilege to be restricted but as a reward to be earned, establishing the right mental model from day one. If the child helps set the goal, the goal belongs to them — which is exactly what Interview 01 flagged as the difference between a rule that sticks and one that breeds resentment.
+        </div>
+      </div>
+    </div>
+
+    <!-- FIG. 03 · APP LAUNCH INTERCEPT (featured full-width) -->
+    <div class="proto-featured" data-fig="FIG. 03 · APP LAUNCH INTERCEPT · THE CORE MOMENT">
       <iframe src="screens/App-Launch-Intercept.html" title="App Launch Intercept" loading="lazy"></iframe>
       <div class="proto-featured-caption">
         <div>
-          <div class="cap-label">Flow 01 · Critical Path</div>
+          <div class="cap-label">Flow 02 · Critical Path</div>
           <div class="cap-title">App Launch Intercept</div>
-          <div class="cap-body">The moment a child tries to open a restricted app before earning screen time, the system's most visible touchpoint.</div>
+          <div class="cap-body">The moment a child taps a restricted app before hitting their goal. The system's most visible and highest-stakes touchpoint.</div>
         </div>
         <div class="cap-why">
           <b>Why this screen matters</b>
-          This is the product's core behavior loop. Rather than a blunt lock screen, the intercept shows the child <em>exactly</em> how close they are to earning access: steps completed, steps remaining, and a direct path to go earn the rest. The design deliberately avoids shame or punishment language; instead it presents a clear, achievable transaction. Research from our parent interviews showed that arbitrary restrictions cause the strongest emotional reactions. Making the rule visible and the path forward immediate is the primary design response to that finding.
+          This is the product's core behavior loop. Rather than a blunt lock screen, the intercept shows the child exactly how close they are to earning access — steps completed, steps remaining, a real-world translation of the gap, and one clear next step. The design deliberately avoids shame or punishment language. Research from our parent interviews showed that arbitrary restrictions cause the strongest emotional reactions. Making the rule visible and the path forward immediate is the primary design response to that finding.
         </div>
       </div>
     </div>
 
-    <div class="proto-featured" data-fig="FIG. 03 · MOVE TO UNLOCK · THE UNLOCK FLOW">
-      <iframe src="screens/Move-to-Unlock-All-Screens.html" title="Move to Unlock" loading="lazy"></iframe>
+    <!-- FIG. 04 + 05 · GOAL MANAGEMENT + DAILY SUMMARY (pair) -->
+    <div class="proto-pair">
+      <div class="proto-card" data-fig="FIG. 04 · GOAL MANAGEMENT">
+        <iframe src="screens/Goal-Management.html" title="Goal Management" loading="lazy"></iframe>
         <div class="proto-card-caption">
-          <div class="cap-label">Flow 03 · Unlock Flow</div>
-          <div class="cap-title">Move to Unlock</div>
-          <div class="cap-body">The step-by-step unlock sequence that converts physical activity into earned screen minutes.</div>
+          <div class="cap-label">Flow 03 · Configuration</div>
+          <div class="cap-title">Goal Management</div>
+          <div class="cap-body">A child adds a goal, hits a parent PIN gate to change activity type, proposes a reward adjustment, and sends the request to mom.</div>
           <div class="cap-why">
             <b>Why this matters</b>
-            The unlock screen borrows the ritual of Apple Pay, a deliberate, satisfying micro-moment that makes earning feel real. Progress is shown in physical terms (steps, distance) rather than abstract time, grounding the reward in tangible effort. The visual design mirrors Apple Health's ring metaphor so the behavior feels continuous with what the OS already teaches.
+            User testing revealed that parents couldn't tell who controlled goal changes and worried their child could bypass the system. The redesigned flow routes every edit through a parent-approved request bounded within a preset range — preserving authority while giving kids a legitimate voice in the negotiation.
           </div>
         </div>
+      </div>
+
+      <div class="proto-card" data-fig="FIG. 05 · DAILY SUMMARY &amp; STREAKS">
+        <iframe src="screens/Daily-Summary.html" title="Daily Summary and Streaks" loading="lazy"></iframe>
+        <div class="proto-card-caption">
+          <div class="cap-label">Flow 04 · Reflection</div>
+          <div class="cap-title">Daily Summary &amp; Streaks</div>
+          <div class="cap-body">End-of-day recap: activity completed, screen time earned, streak progress, and a weekly parent report.</div>
+          <div class="cap-why">
+            <b>Why this matters</b>
+            Feedback loops are as important as the incentive itself. The summary makes the day's effort legible and celebrates it. Streaks extend the time horizon beyond a single day, creating investment that makes kids less likely to break the habit. For parents, the weekly report replaces the nightly interrogation with a shared data artifact.
+          </div>
+        </div>
+      </div>
     </div>
 
-      <div class="proto-featured" data-fig="FIG. 04 · PARENT ↔ CHILD APPROVAL">
-        <div class="proto-card" data-fig="FIG. 06 · PARENT ↔ CHILD APPROVAL">
+    <!-- FIG. 06 + 07 · MOVE TO UNLOCK + PARENT APPROVAL (pair) -->
+    <div class="proto-pair">
+      <div class="proto-card" data-fig="FIG. 06 · MOVE TO UNLOCK · ALL SCREENS">
+        <iframe src="screens/Move-to-Unlock-All-Screens.html" title="Move to Unlock" loading="lazy"></iframe>
+        <div class="proto-card-caption">
+          <div class="cap-label">Flow 05 · Unlock Flow</div>
+          <div class="cap-title">Child View: Main App Screens</div>
+          <div class="cap-body">The full child-side experience: Health summary integration, locked app list with ring progress, goal detail, and the unlock celebration screen.</div>
+          <div class="cap-why">
+            <b>Why this matters</b>
+            The unlock screen borrows the ritual satisfaction of Apple Pay — a deliberate micro-moment that makes earning feel real. Progress shown in physical terms (steps, rings) rather than abstract time grounds the reward in tangible effort and mirrors the visual language Apple Health already teaches.
+          </div>
+        </div>
+      </div>
+
+      <div class="proto-card" data-fig="FIG. 07 · PARENT &amp; CHILD APPROVAL LOOP">
         <iframe src="screens/Parent-Child-Approval.html" title="Parent-Child Approval" loading="lazy"></iframe>
         <div class="proto-card-caption">
-          <div class="cap-label">Flow 05 · Negotiation</div>
-          <div class="cap-title">Parent ↔ Child Approval Loop</div>
-          <div class="cap-body">When a child needs an exception, sick day or school event, they request it and a parent approves or denies.</div>
+          <div class="cap-label">Flow 06 · Negotiation</div>
+          <div class="cap-title">Parent &harr; Child Approval Loop</div>
+          <div class="cap-body">Child sends a time request, parent gets a push notification with 7-day activity context, approves or declines, child sees the result instantly.</div>
           <div class="cap-why">
             <b>Why this matters</b>
-            No system survives contact with real life without an escape valve. The approval loop preserves parental authority for genuine exceptions without making the exception the norm. Crucially, the request comes from the child: they initiate the conversation rather than the parent making a unilateral call. This keeps the dynamic collaborative and teaches kids to articulate their needs rather than react emotionally.
+            No system survives real life without an escape valve. The approval loop preserves parental authority for genuine exceptions without making the exception the norm. The request comes from the child — they initiate the conversation rather than a parent making a unilateral call, keeping the dynamic collaborative and teaching kids to articulate their needs.
           </div>
-        </div>
-      </div>
-
-    <!-- FEATURED: Daily Summary -->
-    <div class="proto-featured" data-fig="FIG. 07 · DAILY SUMMARY &amp; STREAKS · CLOSING THE LOOP">
-      <iframe src="screens/Daily-Summary.html" title="Daily Summary and Streaks" loading="lazy"></iframe>
-      <div class="proto-featured-caption">
-        <div>
-          <div class="cap-label">Flow 06 · Reflection</div>
-          <div class="cap-title">Daily Summary &amp; Streaks</div>
-          <div class="cap-body">End-of-day recap showing activity completed, screen time earned, and streak progress toward longer-term goals.</div>
-        </div>
-        <div class="cap-why">
-          <b>Why this screen matters</b>
-          Behavioral change research consistently shows that feedback loops (seeing your progress) are as important as the incentive itself. The Daily Summary closes the loop: it makes the day's effort legible and celebrates it. Streaks extend the time horizon beyond a single day, creating a longer-term investment that makes kids less likely to break the habit. For parents, the summary replaces the nightly interrogation ("did you hit your steps?") with a shared artifact. The conversation moves from accusation to review.
         </div>
       </div>
     </div>
